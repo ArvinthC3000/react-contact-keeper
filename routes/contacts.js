@@ -6,12 +6,16 @@ const auth = require('../middleware/auth');
 const User = require('../models/User');
 const Contact = require('../models/Contact');
 
+const newContactValidationRequirements = [
+  check('name', 'Name is required').not().isEmpty(),
+];
+
 // Routes
 
-// @route   POST api/contacts
-// @desc    Add new contact
+// @route   GET api/contacts
+// @desc    Get all users from  Database
 // @access  Private
-router.post('/', auth, async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const contacts = await Contact.find({ user: req.user.id }).sort({
       date: -1,
@@ -23,11 +27,30 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-// @route   GET api/contacts
-// @desc    Get all users from  Database
+// @route   POST api/contacts
+// @desc    Add new contact
 // @access  Private
-router.get('/', (req, res) => {
-  res.send('Get all contacts');
+router.post('/', [auth, newContactValidationRequirements], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty())
+    return res.status(400).json({ errors: errors.array() });
+
+  const { name, email, phone, type } = req.body;
+  try {
+    const newContact = new Contact({
+      name,
+      email,
+      phone,
+      type,
+      user: req.user.id,
+    });
+
+    const contact = await newContact.save();
+    res.json({ contact, msg: 'success' });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Server Error');
+  }
 });
 
 // @route   PUT api/contacts/:id
