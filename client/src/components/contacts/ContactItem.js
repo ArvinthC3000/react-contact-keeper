@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import ContactContext from '../../context/contact/contactContext';
 
 const ContactItem = ({ contact }) => {
+  const contactContext = useContext(ContactContext);
+
+  const { deleteContact } = contactContext;
+
   const { id, name, email, phone, type } = contact;
+
+  const onDelete = () => {
+    deleteContact(id);
+  };
   return (
     <div className='card ng-light'>
       <h3 className='text-primary text-left'>
@@ -30,7 +39,9 @@ const ContactItem = ({ contact }) => {
       </ul>
       <p>
         <button className='btn btn-dark btm-sm'>Edit</button>
-        <button className='btn btn-danger btm-sm'>Delete</button>
+        <button className='btn btn-danger btm-sm' onClick={onDelete}>
+          Delete
+        </button>
       </p>
     </div>
   );
