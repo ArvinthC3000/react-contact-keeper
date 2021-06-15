@@ -1,22 +1,20 @@
 import React, { useReducer } from 'react';
 import uuid from 'uuid';
 import ContactContext from './contactContext';
-import contactReducer from './contactReducer';
+import ContactReducer from './contactReducer';
 import {
   ADD_CONTACT,
   DELETE_CONTACT,
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_CONTACT,
-  FILTER_CONTACT,
+  FILTER_CONTACTS,
   CLEAR_FILTER,
-  SET_ALERT,
-  REMOVE_ALERT,
 } from '../types';
 
 const ContactState = props => {
   const initialState = {
-    contact: [
+    contacts: [
       {
         id: 1,
         name: 'Tony Stark',
@@ -29,7 +27,7 @@ const ContactState = props => {
         name: 'Steve Rogers',
         email: 'captain@avengers.com',
         phone: '111-111-1111',
-        type: 'personal',
+        type: 'professional',
       },
       {
         id: 3,
@@ -41,7 +39,7 @@ const ContactState = props => {
     ],
   };
 
-  const [state, dispatch] = useReducer(contactReducer, initialState);
+  const [state, dispatch] = useReducer(ContactReducer, initialState);
 
   //   Add contact
 
