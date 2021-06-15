@@ -18,14 +18,14 @@ const ContactState = props => {
       {
         id: 1,
         name: 'Tony Stark',
-        email: 'sponser@avengers.com',
+        email: 'i.pay@avengers.com',
         phone: '111-111-1111',
         type: 'personal',
       },
       {
         id: 2,
         name: 'Steve Rogers',
-        email: 'captain@avengers.com',
+        email: 'ex.captain@avengers.com',
         phone: '111-111-1111',
         type: 'professional',
       },
