@@ -329,6 +329,11 @@ button {
 .form-group input {
   margin: 0.2rem 0;
 }
+.form-group label {
+  margin: 0.2rem 0;
+  float: left;
+  font-size: 1.2rem;
+}
 
 .form-container {
   max-width: 500px;
