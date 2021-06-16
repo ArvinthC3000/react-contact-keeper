@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import AlertContext from '../../context/alert/alertContext';
 
 const Register = () => {
+  const alertContext = useContext(AlertContext);
+
+  const { setAlert } = alertContext;
+
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -10,11 +15,17 @@ const Register = () => {
 
   const { name, email, password, password2 } = user;
 
-  const onChange = e => setUser({ ...user, [e.targrt.name]: e.targrt.value });
+  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(user, 'register submitted');
+    if (!name.length || !password.length || !email.length) {
+      setAlert('Please fill all the fields', 'danger');
+    } else if (password !== password2) {
+      setAlert('Passwords do not match', 'danger');
+    } else {
+      console.log(user, 'register submitted');
+    }
   };
 
   return (
@@ -24,7 +35,13 @@ const Register = () => {
         <form onSubmit={onSubmit}>
           <div className='form-group'>
             <label htmlFor='name'>Name</label>
-            <input type='text' name='name' value={name} onChange={onChange} />
+            <input
+              type='text'
+              name='name'
+              value={name}
+              onChange={onChange}
+              required
+            />
           </div>
           <div className='form-group'>
             <label htmlFor='email'>Email address</label>
@@ -33,6 +50,7 @@ const Register = () => {
               name='email'
               value={email}
               onChange={onChange}
+              required
             />
           </div>
           <div className='form-group'>
@@ -42,6 +60,8 @@ const Register = () => {
               name='password'
               value={password}
               onChange={onChange}
+              required
+              minLength='6'
             />
           </div>
           <div className='form-group'>
@@ -51,6 +71,8 @@ const Register = () => {
               name='password2'
               value={password2}
               onChange={onChange}
+              required
+              minLength='6'
             />
           </div>
           <input
