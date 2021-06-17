@@ -14,7 +14,7 @@ export const authReducer = (state, action) => {
     case USER_LOADED:
       return {
         ...state,
-        isAuthenticate: true,
+        isAuthenticated: true,
         loading: false,
         user: action.payload,
       };
@@ -23,7 +23,7 @@ export const authReducer = (state, action) => {
       return {
         ...state,
         token: null,
-        isAuthenticate: false,
+        isAuthenticated: false,
         loading: false,
         user: null,
         error: action.payload,
@@ -33,8 +33,8 @@ export const authReducer = (state, action) => {
       localStorage.setItem('token', action.payload.token);
       return {
         ...state,
-        token: action.payload,
-        isAuthenticate: true,
+        token: action.payload.token,
+        isAuthenticated: true,
         loading: false,
       };
     case REGISTER_FAIL:
@@ -42,7 +42,7 @@ export const authReducer = (state, action) => {
       return {
         ...state,
         token: null,
-        isAuthenticate: false,
+        isAuthenticated: false,
         loading: false,
         user: null,
         error: action.payload,
