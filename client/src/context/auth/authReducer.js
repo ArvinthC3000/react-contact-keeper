@@ -29,6 +29,12 @@ export const authReducer = (state, action) => {
         user: null,
         error: action.payload,
       };
+    case CLEAR_ERRORS:
+      localStorage.removeItem('token');
+      return {
+        ...state,
+        error: null,
+      };
 
     default:
       break;
