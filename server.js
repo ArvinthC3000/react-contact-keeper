@@ -12,7 +12,7 @@ app.use(express.json({ extended: false }));
 
 app.use(cors());
 
-app.get('/', (req, res) => res.json({ msg: `Welcome to contact keeper API` }));
+// app.get('/', (req, res) => res.json({ msg: `Welcome to contact keeper API` }));
 
 // Routes
 app.use('/api', require('./routes'));
