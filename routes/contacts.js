@@ -56,7 +56,7 @@ router.post('/', [auth, newContactValidationRequirements], async (req, res) => {
 // @route   PUT api/contacts/:id
 // @desc    Update contact
 // @access  Private
-router.put('/:id', auth, (req, res) => {
+router.put('/:id', auth, async (req, res) => {
   const { name, email, phone, type } = req.body;
 
   // Build contact object
@@ -92,9 +92,9 @@ router.put('/:id', auth, (req, res) => {
 // @route   DELETE api/contacts/:id
 // @desc    Delete contact
 // @access  Private
-router.delete('/:id', auth, (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   try {
-    let contact = Contact.findById(req.params.id);
+    let contact = await Contact.findById(req.params.id);
 
     if (!contact) return res.status(404).json({ msg: 'Contact not found' });
 
