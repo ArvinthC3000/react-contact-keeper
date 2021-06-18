@@ -14,16 +14,17 @@ const Contacts = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!contacts || !contacts.length) return <h4>No contacts found. Add new</h4>;
+  if (contacts !== null && !contacts.length && !loading)
+    return <h4>No contacts found. Add new</h4>;
   //   if (filtered) return <h4>No contacts found. Add new</h4>;
 
   return (
     <>
-      {contacts != null && loading ? (
+      {contacts == null && !loading ? (
         <Spinner />
       ) : (
         <TransitionGroup>
-          {filtered
+          {filtered != null
             ? filtered.map(contact => (
                 <CSSTransition
                   key={contact._id}
