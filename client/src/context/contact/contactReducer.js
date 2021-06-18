@@ -8,6 +8,7 @@ import {
   FILTER_CONTACTS,
   CLEAR_FILTER,
   CONTACT_ERROR,
+  CLEAR_CONTACT,
 } from '../types';
 
 export const reducer = (state, action) => {
@@ -39,6 +40,14 @@ export const reducer = (state, action) => {
           contact => contact.id !== action.payload
         ),
         loading: false,
+      };
+    case CLEAR_CONTACT:
+      return {
+        ...state,
+        contacts: null,
+        filtered: null,
+        error: null,
+        current: null,
       };
     case SET_CURRENT:
       return {
