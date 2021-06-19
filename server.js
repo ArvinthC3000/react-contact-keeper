@@ -14,7 +14,7 @@ app.use(express.json({ extended: false }));
 app.use(cors());
 
 /* Don't uncomment below line in preoduction */
-app.get('/', (req, res) => res.json({ msg: `Welcome to contact keeper API` }));
+// app.get('/', (req, res) => res.json({ msg: `Welcome to contact keeper API` }));
 
 // Routes
 app.use('/api', require('./routes'));
@@ -24,11 +24,8 @@ if (process.env.NODE_ENV === 'production') {
   // Set static folder
   app.use(express.static('client/build'));
 
-  app.get(
-    '/*',
-    (req, res) =>
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')),
-    next()
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   );
 }
 
