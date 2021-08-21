@@ -13,7 +13,7 @@ app.use(express.json({ extended: false }));
 
 app.use(cors());
 
-/* Don't uncomment below line in preoduction */
+/* Don't uncomment below line in production */
 // app.get('/', (req, res) => res.json({ msg: `Welcome to contact keeper API` }));
 
 // Routes
